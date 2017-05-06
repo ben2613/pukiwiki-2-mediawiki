@@ -31,7 +31,7 @@ function processSingle($absPath){
     fwrite($handle, $content);
     fclose($handle);
     //echo $tmpfname;
-    $title = decodeName($path_parts['filename']);
+    $title = str_replace('\'','\\\'',decodeName($path_parts['filename']));
     exec("php $mediawiki_dir/maintenance/edit.php -s 'Migrate from Puki' '$title' < $tmpfname");
     unlink($tmpfname);
 }
